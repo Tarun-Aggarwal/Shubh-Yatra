@@ -1,0 +1,65 @@
+<% layout("layouts/boilerplate") %>
+<style>
+  @media ((min-width: 1200px) and (max-width: 1600px)){
+    .card{
+      width: 30.5% !important;
+    }
+  }
+
+  @media ((min-width: 768px) and (max-width: 1199px)){
+    .card{
+      width: 45.5% !important;
+    }
+  }
+
+  @media ((min-width: 576px) and (max-width: 768px)){
+    .card{
+      width: 95% !important;
+    }
+  }
+
+  @media (max-width: 577px){
+    .card{
+      width: 93% !important;
+    }
+    .filter i {
+      font-size: 1rem !important;
+    }
+    footer .about{
+      padding: 1rem 2rem !important;
+    }
+  }
+
+  @media (max-width: 400px){
+    .filter i {
+      font-size: 0.95rem !important;
+    }
+    .filter p{
+      font-size: 0.75rem !important;
+    }
+  }
+</style>
+<body>
+  <% if(allListings.length) { %>
+    <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1" style="margin-top: 2.5rem;">
+      <% for(let listing of allListings) { %>
+        <div class="card col listing-card" style="width: 20rem;">
+          <a href="/listings/<%= listing._id %>">
+            <img src="<%= listing.image.url %>" class="card-img-top" alt="listing-image">
+          </a>
+          <div class="card-body">
+            <p class="card-text">
+            <b><%= listing.title %></b><br>
+            &#8377; <%= listing.price.toLocaleString("en-IN") %> / night
+            &nbsp; &nbsp; <i class="tax-info">+18% GST</i>
+            </p>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  <% }else{ %>
+    <div class="row mt-3">
+      <h3 class="mb-3 mt-3 col offset-4">No Listings related to <%= country %></h3>
+    </div>
+  <% } %>
+</body>
